@@ -1,6 +1,3 @@
-<script>
-</script>
-
 <svelte:head>
 	<title>Guragura</title>
 	<meta name="description" content="Just how I learn to Svelte!" />

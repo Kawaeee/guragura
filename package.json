@@ -26,7 +26,6 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
-		"@jridgewell/sourcemap-codec": "^1.4.15",
-		"pixi.js": "^7.2.4"
+		"@jridgewell/sourcemap-codec": "^1.4.15"
 	}
 }
