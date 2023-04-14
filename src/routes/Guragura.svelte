@@ -8,6 +8,9 @@
 -->
 
 <script lang="ts">
+    import { fade } from "svelte/transition";
+    import { onMount } from "svelte";
+
     /**
      * The starting position of the player in pixels.
      * @type {number}
@@ -48,7 +51,7 @@
      * The amount of time left in the game in seconds.
      * @type {number}
      */
-    let remainingTime = 120;
+    let remainingTime = 60;
 
     /**
      * The ID of the timer interval function.
@@ -261,7 +264,7 @@
         goalReachedBaseScore = 10;
         scoreMultiplier = 1.0;
 
-        remainingTime = 5;
+        remainingTime = 60;
         goalReachedCount = 0;
     }
 
@@ -274,36 +277,113 @@
         stopTimer();
         window.removeEventListener("keydown", handleKeyDown);
     }
+
+    // This is placeholder for smaller screen
+    let isSmallScreen = false;
+
+    const updateScreenSize = () => {
+        if (window.innerWidth <= 480) {
+            isSmallScreen = true;
+        } else {
+            isSmallScreen = false;
+        }
+    };
+
+    onMount(() => {
+        updateScreenSize();
+        window.addEventListener("resize", updateScreenSize);
+    });
+
 </script>
 
+{#if isSmallScreen}
+<h5 class="message">Try this on larger screen would be 🔥🥕;</h5>
+{/if}
+
 {#if !isGameStarted}
-<div class="guragura-pre">
+<div class="guragura-screen" transition:fade>
     <h1>Ready to Guragura? Start Moving Now!</h1>
     {#if lastGameStatus}
-    <div class="score-pre">
+    <div class="last-score">
         Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
     </div>
     {/if}
-    <button on:click={startGame}>Start Game</button>
+    <button class="start-btn" on:click={startGame}>Run!</button>
 </div>
-
 {/if}
 
 {#if isGameStarted}
-<div class="guragura-game">
-    <div class="score-game">
+<div class="guragura-screen" transition:fade>
+    <div class="current-score">
         Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
         <br>Time remaining: {remainingTime} seconds
     </div>  
-    <div>
+    <div class="game-content">
         <div class="player" style="left: {startPosition}px;"></div>
         <div class="goal"></div>
     </div>
-    <p>Press the left and right arrow keys alternately to move the player!</p>
+    <p class="instruction">Press the left and right arrow keys alternately to move the player!</p>
 </div>
 {/if}
 
 <style>
+    .message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .guragura-screen {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .last-score{
+        font-size: large;
+    }
+
+    .current-score{
+        position: absolute;
+        top: 75px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: large;
+    }
+
+    .game-content {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .instruction {
+        margin-top: 20px;
+    }
+
+    .start-btn {
+        background-color: white;
+        border: none;
+        color: #1F242A;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+
     .player {
         position: absolute;
         bottom: 150%;
@@ -327,53 +407,9 @@
         background-position: center;
     }
 
-    .guragura-game, .guragura-pre{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        max-width: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+    @media (max-width: 480px) {
+        .guragura-screen {
+            display: none;
+        }
     }
-
-    .score-game {
-       font-size: large;
-    }
-
-    .score-pre {
-        position: absolute;
-        top: 75px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    h1{
-        position: absolute;
-        left: 50%;
-        bottom: 0%;
-        transform: translate(-50%, -50%); 
-    }
-
-    button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-  </style>
+</style>
