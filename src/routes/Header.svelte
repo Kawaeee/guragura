@@ -5,7 +5,7 @@
 
 <header>
     <div class="logo">
-        <a href="https://github.com/Kawaeee/guragura">
+        <a href="https://kawaeee.github.io/guragura/">
             <img src={logo} alt="Guragura"/>
         </a>
     </div>
