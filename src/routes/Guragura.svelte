@@ -54,6 +54,12 @@
     let remainingTime = 60;
 
     /**
+     * The amount of time waste on the game in seconds xD.
+     * @type {number}
+     */
+    let cumulativeTimeSpent = 0;
+
+    /**
      * The ID of the timer interval function.
      * @type {number}
      */
@@ -218,6 +224,7 @@
      */
     function addTimeToGame() {
         remainingTime += goalReachedAdditionalTime;
+        cumulativeTimeSpent += goalReachedAdditionalTime;
     }
 
     /**
@@ -264,7 +271,8 @@
         goalReachedBaseScore = 10;
         scoreMultiplier = 1.0;
 
-        remainingTime = 100;
+        remainingTime = 60;
+        cumulativeTimeSpent = 60;
         goalReachedCount = 0;
     }
 
@@ -282,7 +290,7 @@
     let isSmallScreen = false;
 
     const updateScreenSize = () => {
-        if (window.innerWidth <= 480) {
+        if (window.innerWidth <= 500) {
             isSmallScreen = true;
         } else {
             isSmallScreen = false;
@@ -307,9 +315,9 @@
     {#if lastGameStatus}
     <div class="last-score">
         Lap: {goalReachedCount}
-        <br>Score: {startScore.toFixed(2)}
-        <br>Multiplier: x{scoreMultiplier.toFixed(2)}
-        <br>Time remaining: {remainingTime} seconds
+        <br>Score: <span class="blue">{startScore.toFixed(2)}</span>
+        <br>Multiplier: <span class="green">x{scoreMultiplier.toFixed(2)}</span>
+        <br>You have wasted <span class="red">{cumulativeTimeSpent} seconds</span> for previous run.
     </div>
     {/if}
 </div>
@@ -319,9 +327,9 @@
 <div class="guragura-screen" transition:fade>
     <div class="current-score">
         Lap: {goalReachedCount}
-        <br>Score: {startScore.toFixed(2)}
-        <br>Multiplier: x{scoreMultiplier.toFixed(2)}
-        <br>Time remaining: {remainingTime} seconds
+        <br>Score: <span class="blue">{startScore.toFixed(2)}</span>
+        <br>Multiplier: <span class="green">x{scoreMultiplier.toFixed(2)}</span>
+        <br>Time remaining: <span class="red">{remainingTime} seconds</span>
     </div>  
     <div class="game-content">
         <div class="player" style="left: {startPosition}px;"></div>
@@ -354,9 +362,21 @@
         text-align: center;
     }
 
+    .red {
+        color: #FFCCCB;
+    }
+
+    .green {
+        color: lightgreen;
+    }
+
+    .blue {
+        color: lightblue;
+    }
+
     .last-score{
         position: absolute;
-        bottom: -50px;
+        bottom: -100px;
         font-size: medium;
     }
 
@@ -417,7 +437,7 @@
         background-position: center;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 500px) {
         .guragura-screen {
             display: none;
         }
