@@ -142,6 +142,8 @@
      */
     function handleKeyDown(event: { key: any; }) {
         const currentKey = event.key;
+        const player = getPlayer();
+        const goal = getGoal();
 
         if (currentKey === "ArrowLeft" && lastKeyPressed !== "ArrowLeft") {
             startPosition += movePowerPixel;
@@ -150,9 +152,6 @@
             startPosition += movePowerPixel;
             lastKeyPressed = "ArrowRight";
         }
-
-        const player = getPlayer();
-        const goal = getGoal();
 
         if (isPlayerOverlappingGoal(player, goal)) {
             handleGoalReached();
@@ -288,9 +287,10 @@
 <div class="guragura-game">
   <div>Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}</div>
   <div>Time remaining: {remainingTime} seconds</div>
-  <div class="player" style="left: {startPosition}px;"></div>
-  <div class="goal"></div>
-  <slot></slot>
+  <div>
+    <div class="player" style="left: {startPosition}px;"></div>
+    <div class="goal"></div>
+  </div>
   <p>Press the left and right arrow keys alternately to move the player!</p>
 </div>
 {/if}
@@ -300,24 +300,25 @@
         position: absolute;
         bottom: 150%;
         left: 0%;
+        width: 32px;
+        height: 60px;
         transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
-        background-image:url("src/lib/images/github.svg");
-        background-size: contain;
+        background-image:url("src/lib/images/player.gif");
     }
   
     .goal {
-      position: absolute;
-      bottom: 150%;
-      left: 100%;
-      transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      background-image:url("src/lib/images/github.svg");
-      background-size: contain;
+        position: absolute;
+        bottom: 150%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background-image: url("src/lib/images/goal.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
-  
+
     .guragura-game {
         position: absolute;
         top: 50%;
