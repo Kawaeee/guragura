@@ -11,6 +11,9 @@
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
 
+    import playerImage from "$lib/images/player.gif";
+    import goalImage from "$lib/images/goal.png";
+
     /**
      * The starting position of the player in pixels.
      * @type {number}
@@ -332,8 +335,12 @@
         <br>Time remaining: <span class="red">{remainingTime} seconds</span>
     </div>  
     <div class="game-content">
-        <div class="player" style="left: {startPosition}px;"></div>
-        <div class="goal"></div>
+        <div class="player" style="left: {startPosition}px;">
+            <img src={playerImage} alt="player">
+        </div>
+        <div class="goal">
+            <img src={goalImage} alt="goal" width=50 height=50>
+        </div>
     </div>
     <p class="instruction">Press the left and right arrow keys alternately to move the player!</p>
 </div>
@@ -421,7 +428,6 @@
         width: 32px;
         height: 60px;
         transform: translate(-50%, -50%);
-        background-image:url("src/lib/images/player.gif");
     }
   
     .goal {
@@ -431,10 +437,6 @@
         transform: translate(-50%, -50%);
         width: 50px;
         height: 50px;
-        background-image: url("src/lib/images/goal.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
     }
 
     @media (max-width: 500px) {
