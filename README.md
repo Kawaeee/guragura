@@ -1,6 +1,7 @@
 # Guragura
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This repository provides a simple game where the player uses the left and right arrow keys. The goal of the game is to reach the goal (a static element on the screen) as many times as possible before the time runs out. Each time the goal is reached, the player gains points, and the game difficulty increases. The player can overlap with the goal if a certain overlap threshold is met. Just made this for learning how to Svelte, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+
 
 ## Developing
 
@@ -20,4 +21,9 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Deploy to GitHub Pages
+To deploy a static page of the app:
+```bash
+npm run deploy
+```
+

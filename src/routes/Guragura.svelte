@@ -1,10 +1,8 @@
 <!-- 
-* This Guragura.svelte provides a simple game where the player can move left and right
-* using the left and right arrow keys. The goal of the game is to reach the 
-* goal (a static element on the screen) as many times as possible before the 
-* time runs out. Each time the goal is reached, the player gains points and 
-* the game difficulty increases. The player can overlap with the goal if a
-* certain overlap threshold is met.
+* This Guragura.svelte provides a simple game where the player using the left and right arrow keys. 
+* The goal of the game is to reach the goal (a static element on the screen) as many times as 
+* possible before the time runs out. Each time the goal is reached, the player gains points and
+* the game difficulty increases. The player can overlap with the goal if a certain overlap threshold is met.
 -->
 
 <script lang="ts">
