@@ -261,7 +261,7 @@
         goalReachedBaseScore = 10;
         scoreMultiplier = 1.0;
 
-        remainingTime = 120;
+        remainingTime = 5;
         goalReachedCount = 0;
     }
 
@@ -277,21 +277,29 @@
 </script>
 
 {#if !isGameStarted}
-  <button on:click={startGame}>Start Game</button>
-  {#if lastGameStatus}
-    Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
-  {/if}
+<div class="guragura-pre">
+    <h1>Ready to Guragura? Start Moving Now!</h1>
+    {#if lastGameStatus}
+    <div class="score-pre">
+        Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
+    </div>
+    {/if}
+    <button on:click={startGame}>Start Game</button>
+</div>
+
 {/if}
 
 {#if isGameStarted}
 <div class="guragura-game">
-  <div>Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}</div>
-  <div>Time remaining: {remainingTime} seconds</div>
-  <div>
-    <div class="player" style="left: {startPosition}px;"></div>
-    <div class="goal"></div>
-  </div>
-  <p>Press the left and right arrow keys alternately to move the player!</p>
+    <div class="score-game">
+        Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
+        <br>Time remaining: {remainingTime} seconds
+    </div>  
+    <div>
+        <div class="player" style="left: {startPosition}px;"></div>
+        <div class="goal"></div>
+    </div>
+    <p>Press the left and right arrow keys alternately to move the player!</p>
 </div>
 {/if}
 
@@ -319,18 +327,53 @@
         background-position: center;
     }
 
-    .guragura-game {
+    .guragura-game, .guragura-pre{
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-        max-width: 500px; /* or any other maximum width you want */
+        max-width: 700px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        z-index: 0;
     }
+
+    .score-game {
+       font-size: large;
+    }
+
+    .score-pre {
+        position: absolute;
+        top: 75px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    h1{
+        position: absolute;
+        left: 50%;
+        bottom: 0%;
+        transform: translate(-50%, -50%); 
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
   </style>
