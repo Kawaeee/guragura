@@ -25,6 +25,8 @@ const config = {
     },
     paths: {
         base: dev ? '' : '/guragura',
+        // This issue: https://github.com/sveltejs/kit/issues/9404
+        relative: false,
     }
 };
 
