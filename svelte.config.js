@@ -21,13 +21,13 @@ const config = {
         fallback: null,
         precompress: false,
         strict: true
-    })
-    },
+    }),
     paths: {
         base: dev ? '' : '/guragura',
         // This issue: https://github.com/sveltejs/kit/issues/9404
         relative: false,
     }
+    },
 };
 
 export default config;
