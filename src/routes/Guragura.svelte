@@ -264,7 +264,7 @@
         goalReachedBaseScore = 10;
         scoreMultiplier = 1.0;
 
-        remainingTime = 60;
+        remainingTime = 100;
         goalReachedCount = 0;
     }
 
@@ -303,19 +303,24 @@
 {#if !isGameStarted}
 <div class="guragura-screen" transition:fade>
     <h1>Ready to Guragura? Start Moving Now!</h1>
+    <button class="start-btn" on:click={startGame}>Run!</button>
     {#if lastGameStatus}
     <div class="last-score">
-        Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
+        Lap: {goalReachedCount}
+        <br>Score: {startScore.toFixed(2)}
+        <br>Multiplier: x{scoreMultiplier.toFixed(2)}
+        <br>Time remaining: {remainingTime} seconds
     </div>
     {/if}
-    <button class="start-btn" on:click={startGame}>Run!</button>
 </div>
 {/if}
 
 {#if isGameStarted}
 <div class="guragura-screen" transition:fade>
     <div class="current-score">
-        Lap: {goalReachedCount}, Score: {startScore.toFixed(2)}, Multiplier: x{scoreMultiplier.toFixed(2)}
+        Lap: {goalReachedCount}
+        <br>Score: {startScore.toFixed(2)}
+        <br>Multiplier: x{scoreMultiplier.toFixed(2)}
         <br>Time remaining: {remainingTime} seconds
     </div>  
     <div class="game-content">
@@ -350,20 +355,25 @@
     }
 
     .last-score{
-        font-size: large;
+        position: absolute;
+        bottom: -50px;
+        font-size: medium;
     }
 
     .current-score{
         position: absolute;
-        top: 75px;
+        top: 100px;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: large;
+        font-size: medium;
     }
 
     .game-content {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
     }
 
     .instruction {
